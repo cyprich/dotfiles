@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd "$HOME/dotfiles"
-OUTPUTFILE="$./.zshrc"
+OUTPUTFILE="./.zshrc"
 touch $OUTPUTFILE
 
 clear
@@ -45,7 +45,6 @@ done
 # checking default shell
 if [[ ! "$SHELL" == *"zsh"* ]]; then
     echo "Your shell is not set to ZSH"
-    echo "$SHELL"
 
     chsh -s "/bin/zsh"
     
@@ -85,7 +84,7 @@ echo ""
 
 selected_prompt="$prompts[$choice]"
 
-if [ choice -ne 1 ] & [ ! command -v "$selected_prompt" &> /dev/null ]; then
+if [ choice -ne 1 ] && [ ! command -v "$selected_prompt" &> /dev/null ]; then
     echo "$selected_prompt is not installed on your system"
     echo "This will cause more problems in the future"
     echo "It's recommended to install $selected_prompt first"
