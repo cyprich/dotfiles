@@ -1,0 +1,5 @@
+
+# prompt - oh my posh
+eval "$(oh-my-posh init zsh)"
+# eval "$(oh-my-posh init zsh --config ~/.zsh-config/ohmyposh-themes/stelbent-compact.minimal.omp.json)"
+

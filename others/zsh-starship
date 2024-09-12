@@ -1,0 +1,5 @@
+
+# prompt - starship
+eval "$(starship init zsh)"
+starship preset gruvbox-rainbow -o ~/.config/starship.toml
+
