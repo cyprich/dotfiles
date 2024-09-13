@@ -3,6 +3,7 @@
 
 README.*
 
-others
-backups
+others/
+backups/
+use.sh
 

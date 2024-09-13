@@ -51,18 +51,31 @@ if [[ ! "$SHELL" == *"zsh"* ]]; then
     if [ ! $? -eq 0 ]; then
         echo "Shell couldn't be changed to '/bin/zsh'"
         echo "Make sure zsh is installed and run this script again, or change it manually later"
-        echo ""
     fi
+    
+    echo ""
 fi
 
-# backing up previous zsh configuration, if present
+# backing up previous configurations, if present
+filename=$( date +%s )
+
 if [ -f "$HOME/.zshrc" ]; then
     mkdir -p "./backups/zsh"
-    mv "$HOME/.zshrc" "./backups/zsh/$( date +%s )"
+    mv "$HOME/.zshrc" "./backups/zsh/$filename"
+fi
+if [ -f "$HOME/.p10k.zsh" ]; then
+    mkdir -p "./backups/p10k"
+    mv "$HOME/.p10k.zsh" "./backups/p10k/$filename"
+fi
+if [ -d "$HOME/.config/nvim/" ]; then
+    mkdir -p "./backups/nvim"
+    tar -czf "$HOME/.config/$filename.tar.gz" "$HOME/.config/nvim" 2>/dev/null
+    mv "$HOME/.config/$filename.tar.gz" "./backups/nvim"
+    #rm -rf "$HOME/.config/nvim/"
 fi
 
 # first part of zsh config
-cat "./others/zsh-first" >> $OUTPUTFILE 
+cat "./others/zsh-first" > $OUTPUTFILE 
 
 # choosing prompt
 prompts=("p10k" "oh-my-posh" "starship")
@@ -82,9 +95,9 @@ echo "    3) starship"
 read -n 1 -s choice
 echo ""
 
-selected_prompt="$prompts[$choice]"
+selected_prompt="${prompts[$choice - 1]}"
 
-if [ choice -ne 1 ] && [ ! command -v "$selected_prompt" &> /dev/null ]; then
+if [ "$choice" -ne 1 ] && [ ! command -v "$selected_prompt" &> /dev/null ]; then
     echo "$selected_prompt is not installed on your system"
     echo "This will cause more problems in the future"
     echo "It's recommended to install $selected_prompt first"
@@ -95,7 +108,7 @@ if [ choice -ne 1 ] && [ ! command -v "$selected_prompt" &> /dev/null ]; then
     read -n 1 -s choice
     echo ""
 
-    if [ choice -eq 1 ]; then
+    if [ ! choice -eq 2 ]; then
         selected_prompt="p10k"
     fi
 fi
@@ -112,7 +125,6 @@ else
     stow .
 fi
 
-echo ""
 echo "Configuration complete!"
 echo "Now make sure you are using Nerd font as your terminal default and restart your terminal"
 
