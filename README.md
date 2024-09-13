@@ -57,10 +57,11 @@ Your terminal will *work* the same, but it will *look* a lot worse than it would
             2. Go to `Create New Profile`
             3. Go to `Appearance` tab
             4. Click on `Choose` next to `Font` and select the font you just installed
+    - If you don't see your new font here, and you are sure you installed it correctly, restart your terminal application
 
 #### Note for users of Arch-based Linux distributions
-If you are using `yay` as your package manager, you can install the font via `yay`  
-For example `yay -S ttf-jetbrains-mono-nerd` will install *JetBrainsMono Nerd Font*  
+If you are using `pacman` as your package manager, you can install the font via `pacman`  
+For example `pacman -S ttf-jetbrains-mono-nerd` will install *JetBrainsMono Nerd Font*  
 Now you just have to set it as your terminal application default (step 6 from previous section)
 
 ---
