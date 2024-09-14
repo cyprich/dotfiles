@@ -46,7 +46,7 @@ if ! command -v zsh &> /dev/null; then
     echo "ZSH is not installed on your system"
     echo "Install 'zsh' and run this script again, or enable ZSH manually"
 else 
-    if [[ ! "$SHELL" == $( where zsh ) ]]
+    if [[ ! "$SHELL" == $( where zsh ) ]]; then
         echo "Your defalt shell is not ZSH, changing..."
         chsh -s $( which zsh )
     fi
