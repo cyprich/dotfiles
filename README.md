@@ -22,8 +22,8 @@ Packages that are required to make this run successfully
 > Note: There is a file `requirements.txt`, which you can simply view with the command `cat requirements.txt`
 
 ## Installation
-1. Clone this repository to your home directory
-    - `git clone https://github.com/yungcypo/dotfiles ~/dotfiles/`
+1. Clone this repository to subfolder of your home directory
+    - `git clone https://github.com/yungcypo/dotfiles.git ~/dotfiles/`
     - `cd ~/dotfiles/`
 2. Start script, which will guide you through installation
     - `./use.sh` 
