@@ -41,19 +41,15 @@ for i in "${dependencies[@]}"; do
     dependency_check $i
 done
 
-
-# checking default shell
-if [[ ! "$SHELL" == *"zsh"* ]]; then
-    echo "Your shell is not set to ZSH"
-
-    chsh -s "/bin/zsh"
-    
-    if [ ! $? -eq 0 ]; then
-        echo "Shell couldn't be changed to '/bin/zsh'"
-        echo "Make sure zsh is installed and run this script again, or change it manually later"
+# changing shell
+if ! command -v zsh &> /dev/null; then
+    echo "ZSH is not installed on your system"
+    echo "Install 'zsh' and run this script again, or enable ZSH manually"
+else 
+    if [[ ! "$SHELL" == $( where zsh ) ]]
+        echo "Your defalt shell is not ZSH, changing..."
+        chsh -s $( which zsh )
     fi
-    
-    echo ""
 fi
 
 # backing up previous configurations, if present

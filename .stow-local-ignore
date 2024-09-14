@@ -1,9 +1,10 @@
 .git
 .gitignore
-
 README.*
 
 others
 backups
+.obsidian
+
 use.sh
 

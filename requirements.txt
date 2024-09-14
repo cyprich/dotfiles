@@ -1,0 +1,10 @@
+--- Required packages ---
+git
+zsh
+fzf
+neovim
+stow
+
+--- Optional packages ---
+yazi
+oh-my-posh or starship
