@@ -90,6 +90,7 @@ What does this configuration offer?
     - `lla` is the same as before with additional `-a` flag (show hidden files)
 - Neovim
     - Configuration based on [NvChad](https://nvchad.com/)
+    - After first running Neovim, type this command... `:MasonInstallAll`
     - If you want to use [WakaTime](https://wakatime.com/) in Neovim, please enter the command `:WakaTimeApiKey` after opening Neovim
 - fzf
     - Fuzzy finder, which helps you find files in command line easier
