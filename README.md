@@ -23,7 +23,7 @@ Packages that are required to make this run successfully
 
 ## Installation
 1. Clone this repository to subfolder of your home directory
-    - `git clone https://github.com/yungcypo/dotfiles.git ~/dotfiles/`
+    - `git clone https://github.com/cyprich/dotfiles.git ~/dotfiles/`
     - `cd ~/dotfiles/`
 2. Start script, which will guide you through installation
     - `./use.sh` 
@@ -126,7 +126,7 @@ To keep up with this repository, follow these steps
 
 ---
 
-If something doesn't work, please contact me (see bellow) or [submit an issue](https://github.com/yungcypo/dotfiles/issues/new/choose) on this repository
+If something doesn't work, please contact me (see bellow) or [submit an issue](https://github.com/cyprich/dotfiles/issues/new/choose) on this repository
 
 | Contact |
 | --- |
