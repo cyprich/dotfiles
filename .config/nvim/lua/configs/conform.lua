@@ -3,6 +3,9 @@ local options = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
+    bash = { "beautysh" },
+    markdown = { "markdownlint" },
+    python = { "darker" },
   },
 
   -- format_on_save = {
