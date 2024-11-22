@@ -26,6 +26,7 @@ bindkey '^H' backward-kill-word
 # aliases
 alias ll='ls -lv --color --time-style="+%Y-%m-%d"'
 alias lla='ll -a'
+alias ip='ip -c'
 
 # disable underline
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES

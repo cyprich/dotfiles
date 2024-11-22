@@ -35,7 +35,7 @@ dependency_check() {
 
 }
 
-dependencies=("git" "zsh" "fzf" "nvim" "stow")
+dependencies=("git" "zsh" "fzf" "nvim" "stow" "tmux" "which")
 
 for i in "${dependencies[@]}"; do 
     dependency_check $i
@@ -62,6 +62,10 @@ fi
 if [ -f "$HOME/.p10k.zsh" ]; then
     mkdir -p "./backups/p10k"
     mv "$HOME/.p10k.zsh" "./backups/p10k/$filename"
+fi
+if [ -f "$HOME/.tmux.conf" ]; then
+    mkdir -p "./backups/tmux"
+    mv "$HOME/.tmux.conf" "./backups/tmux/$filename"
 fi
 if [ -d "$HOME/.config/nvim/" ]; then
     mkdir -p "./backups/nvim"

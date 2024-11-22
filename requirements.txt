@@ -3,7 +3,9 @@ git
 zsh
 fzf
 neovim
+tmux
 stow
+which
 
 --- Optional packages ---
 yazi
