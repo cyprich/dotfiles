@@ -51,7 +51,6 @@ bindkey '^[[1;5C' emacs-forward-word
 bindkey '^[[1;5D' emacs-backward-word
 bindkey '^H' backward-kill-word
 
-
 # aliases
 alias ll='ls -lv --color --time-style="+%Y-%m-%d"'
 alias lla='ll -a'
@@ -60,6 +59,7 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
+alias gp='git push'
 
 # disable underline
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
