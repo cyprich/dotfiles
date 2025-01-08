@@ -53,7 +53,7 @@ bindkey '^H' backward-kill-word
 
 # aliases
 alias ll='ls -lv --color --time-style="+%Y-%m-%d"'
-alias lla='ll -a'
+alias lla='ll -A'
 alias ip='ip -c'
 alias gs='git status'
 alias ga='git add'
@@ -74,5 +74,3 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # fzf setup
 # use ctrl+t to open fzf mid-command 
 eval "$(fzf --zsh)"
-
-eval $(thefuck --alias)

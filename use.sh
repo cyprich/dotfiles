@@ -1,130 +1,118 @@
 #!/bin/bash
 
-cd "$HOME/dotfiles"
-OUTPUTFILE="./.zshrc"
-touch $OUTPUTFILE
-
 clear
-
-echo "                         _           _       _    __ _ _            "
-echo "                        ( )         | |     | |  / _(_) |           "
-echo "   ___ _   _ _ __   ___ |/ ___    __| | ___ | |_| |_ _| | ___  ___  "
-echo "  / __| | | |  _ \ / _ \  / __|  / _  |/ _ \| __|  _| | |/ _ \/ __| "
-echo " | (__| |_| | |_) | (_) | \__ \ | (_| | (_) | |_| | | | |  __/\__ \ "
-echo "  \___|\__, | .__/ \___/  |___/  \__,_|\___/ \__|_| |_|_|\___||___/ "
-echo "        __/ | |                                                     "
-echo "       |___/|_|  "
+echo ""
+echo "                          _           _       _    __ _ _            "
+echo "                         ( )         | |     | |  / _(_) |           "
+echo "    ___ _   _ _ __   ___ |/ ___    __| | ___ | |_| |_ _| | ___  ___  "
+echo "   / __| | | |  _ \ / _ \  / __|  / _  |/ _ \| __|  _| | |/ _ \/ __| "
+echo "  | (__| |_| | |_) | (_) | \__ \ | (_| | (_) | |_| | | | |  __/\__ \ "
+echo "   \___|\__, | .__/ \___/  |___/  \__,_|\___/ \__|_| |_|_|\___||___/ "
+echo "         __/ | |                                                     "
+echo "        |___/|_|                                                     "
+echo ""
 echo ""
 
-# checking dependencies
-dependency_check() {
-    if ! command -v $1 &> /dev/null; then
-        echo "$1 is not installed"
-        echo "Do you wish to continue?"
-        echo "    1) yes"
-        echo "    2) no (default)"
-
-        read -n 1 -s choice
-        echo ""
-
-        if [ ! "$choice" == "1" ]; then
-            echo "Script ended because dependency \"$1\" is missing"
-            exit 1
-        fi
+# warning! deleting files
+files_to_delete=("$HOME/.config/nvim/" "$HOME/.config/ghostty/" "$HOME/.p10k.zsh" "$HOME/.tmux.conf" "$HOME/.zshrc" "$HOME/.local/share/nvim/" "$HOME/.local/state/nvim/" "$HOME/.cache/nvim/")
+affected_files=()
+for i in "${files_to_delete[@]}"; do
+    if [ -e "$i" ]; then
+        affected_files+=("$i")
     fi
-
-}
-
-dependencies=("git" "zsh" "fzf" "nvim" "stow" "tmux" "which")
-
-for i in "${dependencies[@]}"; do 
-    dependency_check $i
 done
 
-# changing shell
-if ! command -v zsh &> /dev/null; then
-    echo "ZSH is not installed on your system"
-    echo "Install 'zsh' and run this script again, or enable ZSH manually"
-else 
-    if [[ ! "$SHELL" == $( where zsh ) ]]; then
-        echo "Your defalt shell is not ZSH, changing..."
-        chsh -s $( which zsh )
-    fi
-fi
+if [ "${#affected_files[@]} -gt 0" ]; then
+    echo "This script will delete previous configurations"
+    echo "Affected files and folders:"
 
-# backing up previous configurations, if present
-filename=$( date +%s )
+    for i in "${affected_files[@]}"; do
+        echo "   $i"
+    done
 
-if [ -f "$HOME/.zshrc" ]; then
-    mkdir -p "./backups/zsh"
-    mv "$HOME/.zshrc" "./backups/zsh/$filename"
-fi
-if [ -f "$HOME/.p10k.zsh" ]; then
-    mkdir -p "./backups/p10k"
-    mv "$HOME/.p10k.zsh" "./backups/p10k/$filename"
-fi
-if [ -f "$HOME/.tmux.conf" ]; then
-    mkdir -p "./backups/tmux"
-    mv "$HOME/.tmux.conf" "./backups/tmux/$filename"
-fi
-if [ -d "$HOME/.config/nvim/" ]; then
-    mkdir -p "./backups/nvim"
-    tar -czf "$HOME/.config/$filename.tar.gz" "$HOME/.config/nvim" 2>/dev/null
-    mv "$HOME/.config/$filename.tar.gz" "./backups/nvim"
-    #rm -rf "$HOME/.config/nvim/"
-fi
-
-# first part of zsh config
-cat "./others/zsh-first" > $OUTPUTFILE 
-
-# choosing prompt
-prompts=("p10k" "oh-my-posh" "starship")
-
-is_prompt_available() {
-    if command -v $1 &> /dev/null; then
-        return 0
-    fi
-
-    return 1
-}
-
-echo "Which prompt do you want to use?"
-echo "    1) p10k (default)"
-echo "    2) oh-my-posh"
-echo "    3) starship"
-read -n 1 -s choice
-echo ""
-
-selected_prompt="${prompts[$choice - 1]}"
-
-if [ "$choice" -ne 1 ] && [ ! command -v "$selected_prompt" &> /dev/null ]; then
-    echo "$selected_prompt is not installed on your system"
-    echo "This will cause more problems in the future"
-    echo "It's recommended to install $selected_prompt first"
     echo ""
-    echo "Do you wish to use $selected_prompt anyway?"
-    echo "    1) No, use default prompt - p10k instead (default)"
-    echo "    2) Yes, use $selected_prompt (not recommended)"
+    echo "Do you wish to continue? [y/N]"
     read -n 1 -s choice
-    echo ""
 
-    if [ ! choice -eq 2 ]; then
-        selected_prompt="p10k"
+    if [ ! "$choice" == "y" ]; then
+        exit 1
+    fi
+
+    for i in "${affected_files[@]}"; do
+        rm -rf "$i"
+    done
+
+    echo ""
+fi
+
+# check dependencies
+dependencies=("git" "zsh" "fzf" "nvim" "stow" "tmux" "which")
+missing_dependencies=()
+
+for i in "${dependencies[@]}"; do
+    if ! command -v $i &>/dev/null; then
+        missing_dependencies+=("$i")
+    fi
+done
+
+if [ "${#missing_dependencies[@]}" -gt 0 ]; then
+    echo "There are missing dependencies:"
+    for i in "${missing_dependencies[@]}"; do
+        echo "    $i"
+    done
+    echo ""
+    echo "Do you wish to continue? [y/N]"
+
+    read -n 1 -s choice
+
+    if [ ! "$choice" == "y" ]; then
+        exit 1
+    fi
+
+    echo ""
+fi
+
+# changing shell
+if ! command -v zsh &>/dev/null; then
+    echo "'zsh' is not installed on your system"
+    echo "Install 'zsh' and run this script again, or enable 'zsh' manually"
+    echo ""
+else
+    if [[ ! "$SHELL" == $(which zsh) ]]; then
+        echo "Your defalt shell is not ZSH, changing..."
+        echo ""
+        chsh -s $(which zsh)
     fi
 fi
 
-# second part of zsh config
-cat "./others/zsh-$selected_prompt" >> $OUTPUTFILE
-cat "./others/zsh-last" >> $OUTPUTFILE
-
-
-if ! command -v "stow" &> /dev/null; then
-    echo "stow is not installed, therefore this configuration cannot be applied automatically"
-    echo "Please install stow or apply it manually"
+if ! command -v "stow" &>/dev/null; then
+    echo "'stow' is not installed on your system"
+    echo "Install 'stow' or apply the configuration manually"
+    echo ""
 else
     stow .
 fi
 
-echo "Configuration complete!"
-echo "Now make sure you are using Nerd font as your terminal default and restart your terminal"
+# source (use) zsh config
+source "$HOME/.zshrc"
 
+# for some reason, it keeps removing git aliases
+git restore .zshrc
+
+# adding thefuck if it's installed
+if ! command -v thefuck &>/dev/null; then
+    if ! grep -q "eval \$(thefuck --alias)" "$HOME/.zshrc"; then
+        echo 'eval $(thefuck --alias)' >>"$HOME/.zshrc"
+    fi
+fi
+
+echo "Configuration complete!"
+echo "Now make sure you are using Nerd font in your terminal emulator"
+echo "Press enter to continue..."
+
+read -n 1
+echo ""
+echo "If you want to reconfigure prompt, run 'p10k configure'"
+echo "You can use Wakatime in Neovim with ':WakaTimeApiKey' command"
+echo "Check out 'ghostty' teminal emulator"
+echo "Check out 'yazi'"
