@@ -7,3 +7,6 @@ vim.opt.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent
 vim.opt.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for
 vim.opt.softtabstop = 4 -- (Optional) Number of spaces a <Tab> counts for while editing
 vim.opt.expandtab = true -- Convert tabs to spaces
+
+-- max line length
+vim.opt.textwidth = 160

@@ -1,3 +1,4 @@
 theme = Abernathy
 font-size = 10
-fullscreen = true
+window-height = 1000
+window-width = 1000
