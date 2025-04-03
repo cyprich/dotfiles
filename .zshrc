@@ -54,12 +54,15 @@ bindkey '^H' backward-kill-word
 # aliases
 alias ll='ls -lv --color --time-style="+%Y-%m-%d"'
 alias lla='ll -A'
+alias llt='ll -t'
 alias ip='ip -c'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
 alias gp='git push'
+alias python='python3'
+alias py='python'
 
 # disable underline
 (( ${+ZSH_HIGHLIGHT_STYLES} )) || typeset -A ZSH_HIGHLIGHT_STYLES
