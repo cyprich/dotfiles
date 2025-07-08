@@ -1,0 +1,9 @@
+theme = 0x96f
+
+font-size = 12 
+font-family = JetBrainsMono Nerd Font
+
+window-height = 1000
+window-width = 1000
+
+copy-on-select = clipboard

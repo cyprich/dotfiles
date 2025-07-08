@@ -1,0 +1,122 @@
+add_newline = true
+
+format="""
+$os\
+$directory\
+$git_branch\
+$git_status\
+$localip\
+\
+$fill \
+$c\
+$cpp\
+$dotnet\
+$java\
+$nodejs\
+$python\
+$rust\
+$shell\
+$docker_context\
+\
+$jobs\
+$cmd_duration\
+$line_break\
+\
+$sudo\
+$character"""
+
+[directory]
+truncate_to_repo=false
+read_only=' 󰌾 '
+
+[directory.substitutions]
+'Documents'='󰈙 '
+'Downloads'=' '
+'Music'=' '
+'Pictures'=' '
+'Videos'=' '
+
+[git_branch]
+symbol=' '
+
+[git_status]
+format='[$all_status$ahead_behind]($style)'
+conflicted='${count}= '
+ahead='${count}⇡ '
+behind='${count}⇣ '
+untracked='${count}? '
+stashed='${count}$ '
+modified='${count}! '
+staged='${count}+ '
+renamed='${count}» '
+deleted='${count} '
+
+[localip]
+format='[@$localipv4]($style)'
+disabled=false
+
+[os]
+format='[$symbol]($style) '
+disabled=false
+
+
+[os.symbols]
+Alpine=' '
+Arch='󰣇 '
+Android = ' '
+Debian = ' '
+EndeavourOS = ' '
+Fedora = ' '
+FreeBSD = ' '
+Garuda = ' '
+Gentoo = ' '
+Kali = ' '
+Linux = ' '
+Macos = ' '
+Manjaro = ' '
+Mint = '󰣭 '
+NixOS = ' '
+OracleLinux = ' '
+Pop = ' '
+Raspbian = ' '
+Redhat = '󱄛 '
+RedHatEnterprise = '󱄛 '
+RockyLinux = ' '
+Ubuntu = ' '
+Unknown = ' '
+Void = '  '
+Windows = ' '
+
+[fill]
+disabled=false
+symbol='· '
+style='bright-black'
+
+[c]
+symbol=' '
+
+[cpp]
+symbol=' '
+
+[dotnet]
+symbol='󰪮 '
+
+[java]
+symbol=' '
+
+[nodejs]
+symbol=' '
+
+[python]
+symbol=' '
+
+[rust]
+symbol=' '
+
+[docker_context]
+symbol=' '
+
+[sudo]
+format='[$symbol]($style) '
+disabled=false
+symbol=' '
